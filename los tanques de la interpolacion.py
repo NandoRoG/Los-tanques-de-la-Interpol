@@ -21,39 +21,80 @@ def DrawLand(screen: pygame.Surface, func, width, height):
            last = func(i)
            pygame.draw.line(screen, (155,118,83), (i, last), (i, height))
         else:
+           
            pygame.draw.line(screen, (155,118,83), (i, dropLeft(i, last)), (i, height))
-
+    for i in range(width//2 -100,width//2+100):
+        if i%10 == 0:
+               pygame.draw.line(screen,(0,0,0),(i,func(i)),(i+5,func(i+5)),5)
     for i in range(width, width // 2, -1):
         if i > width / 2 + 100:
            last = func(i)
            pygame.draw.line(screen, (155,118,83), (i, last), (i, height))
         else:
+           
            pygame.draw.line(screen, (155,118,83), (i, dropRight(i, last)), (i, height))
 
 # %%
 #Effects
 
 def game_over(screen: pygame.Surface, x_player, func, turn):
-    fuente = pygame.font.Font(None,30)
-    msg = fuente.render("Congratulations " + ("Player 1" if turn == 0 else "Player 2") + " !!!!!!!!",1,(255,0,0))
-    screen.blit(msg,(700,200))
+    fuente = pygame.font.Font(None,40)
+    msg = fuente.render("Has ganado 50000 creditos " + ("Player 1" if turn == 0 else "Player 2") + ", te los da Fernando Rodriguez ;-)  !!!!",1,(0,0,0))
+    screen.blit(msg,(350,50))
     pygame.display.flip()
     pygame.time.delay(5000)
 
 def hit(screen: pygame.Surface, x_player, func, turn):
-    fuente = pygame.font.Font(None,30)
-    msg = fuente.render("Good one " + ("Player 1" if turn == 0 else "Player 2"),1,(255,0,0))
-    screen.blit(msg,(700,200))
+    explode = pygame.mixer.Sound("Pictures/explosion.wav")
+    explode.play()
+    fuente = pygame.font.Font(None,40)
+    msg = fuente.render("Good one " + ("Player 1" if turn == 0 else "Player 2"),1,(0,255,0))
+    screen.blit(msg,(450,50))
+    pygame.display.flip()
+    pygame.time.delay(2000)
+def hit1(screen: pygame.Surface, x_player, func, turn):
+    explode = pygame.mixer.Sound("Pictures/explosion.wav")
+    explode.play()
+    fuente = pygame.font.Font(None,40)
+    msg = fuente.render("Suerte de principiante " + ("Player 1" if turn == 0 else "Player 2"),1,(0,255,0))
+    screen.blit(msg,(450,50))
+    pygame.display.flip()
+    pygame.time.delay(2000)
+def hit2(screen: pygame.Surface, x_player, func, turn):
+    explode = pygame.mixer.Sound("Pictures/explosion.wav")
+    explode.play()
+    fuente = pygame.font.Font(None,40)
+    msg = fuente.render("Has estado practicando " + ("Player 1" if turn == 0 else "Player 2"),1,(0,255,0))
+    screen.blit(msg,(450,50))
+    pygame.display.flip()
+    pygame.time.delay(2000)
+def hit3(screen: pygame.Surface, x_player, func, turn):
+    explode = pygame.mixer.Sound("Pictures/explosion.wav")
+    explode.play()
+    fuente = pygame.font.Font(None,40)
+    msg = fuente.render("Ay mi madre el bicho!!!",1,(0,0,255))
+    screen.blit(msg,(450,50))
     pygame.display.flip()
     pygame.time.delay(2000)
 
 def miss(screen: pygame.Surface, x_player, func, turn):
-    fuente = pygame.font.Font(None,30)
-    msg = fuente.render("Vete pa la Cujae " + ("Player 1" if turn == 0 else "Player 2") + " :|",1,(255,0,0))
-    screen.blit(msg,(700,200))
+    fuente = pygame.font.Font(None,40)
+    msg = fuente.render("Newton se esta retorciendo en su tumba :|",1,(255,0,0))
+    screen.blit(msg,(450,50))
     pygame.display.flip()
     pygame.time.delay(2000)
-
+def miss1(screen: pygame.Surface, x_player, func, turn):
+    fuente = pygame.font.Font(None,40)
+    msg = fuente.render("El que no sabe tirar le echa la culpa a la aritmetica",1,(255,0,0))
+    screen.blit(msg,(450,50))
+    pygame.display.flip()
+    pygame.time.delay(3000)
+def miss2(screen: pygame.Surface, x_player, func, turn):
+    fuente = pygame.font.Font(None,40)
+    msg = fuente.render("Pero esto que eh",1,(255,0,0))
+    screen.blit(msg,(450,50))
+    pygame.display.flip()
+    pygame.time.delay(2000)
 # %%
 # Set up the drawing window
 screen = pygame.display.set_mode([1500, 780])
@@ -61,19 +102,27 @@ pygame.display.set_caption("Los Tanques de la Interpol...")
 screen.fill((64, 207, 255))
 
 effect_game_over = [game_over]
-effect_hit = [hit]
-effect_miss = [miss]
+effect_hit = [hit,hit1,hit2,hit3]
+effect_miss = [miss,miss1,miss2]
 
-# def func(x):
+#def func(x):
 #     return 0.2 * x + 400
-# def derFunc(x):
+#def derFunc(x):
 #     return 0.2
-
 def func(x):
-    return 650
+    return  100*math.sin(0.01*x +10) + 650
 def derFunc(x):
-    return 0
-
+    return math.cos(0.01*x +10)
+#def func(x):
+#    return 650
+#def derFunc(x):
+#    return 0
+#def func(x):
+#    if x < 1500/2 -150 or x > 1500/2 +150:
+#        return 650 
+#    return 200
+#def derFunc(x):
+#    return 0
 DrawLand(screen, func, 1500, 780)
 
 screenLand = screen.convert()
@@ -190,6 +239,7 @@ import random
 
 
 def fire(turn, life_player1, life_player2):
+
     if turn == 0:
         points_x.append(x_player1)
         points_y.append(func(x_player1) - 50)
@@ -223,10 +273,11 @@ def fire(turn, life_player1, life_player2):
     screen_old = screen.convert()
 
     count = 0
-
+    audio = pygame.mixer.Sound("Pictures/Cymatics - Gunshot Beefy.wav")
+    audio.play()
     for i in r:
             count += 1
-
+            
             y = pol[0]*(i**2) + pol[1] * i + pol[2]
 
             if turn == 1:
@@ -268,6 +319,7 @@ def fire(turn, life_player1, life_player2):
                 screen.blit(newBala, (i - newBala.get_width() / 2, y - newBala.get_height() / 2))
                 pygame.display.flip()
             else:
+                
                 random.choice(effect_miss)(screen, x_player1 if turn == 0 else x_player2, func, turn)
                 break
 
@@ -292,9 +344,11 @@ def printMove():
 # %%
 pygame.display.flip()
 running = True
-
+audio = pygame.mixer.Sound("Pictures/wind.wav")
+audio.set_volume(audio.get_volume()/50)
+audio.play(10000)
 while running:
-
+   
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_RIGHT]:
