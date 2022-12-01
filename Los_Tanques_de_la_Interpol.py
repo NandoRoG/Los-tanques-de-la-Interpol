@@ -1,4 +1,3 @@
-
 import numpy as np 
 import pygame
 from pygame import MOUSEBUTTONUP, MOUSEBUTTONDOWN
@@ -124,12 +123,6 @@ on_click = False
 while running:
     
     PrintGame()
-    
-       
-        
-
-    
-    
     
     but =  pygame.mouse.get_pressed(3)
     if but[0] and not on_click:

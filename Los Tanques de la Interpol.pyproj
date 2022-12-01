@@ -11,6 +11,7 @@
     <OutputPath>.</OutputPath>
     <Name>Los Tanques de la Interpol</Name>
     <RootNamespace>Los Tanques de la Interpol</RootNamespace>
+    <InterpreterId>MSBuild|.venv|$(MSBuildProjectFullPath)</InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,17 @@
     <Content Include="Pictures\images %282%29.jpg" />
     <Content Include="Pictures\images.jpg" />
     <Content Include="Pictures\images2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\..\..\Documents\SVD\.venv\">
+      <Id>.venv</Id>
+      <Version>3.9</Version>
+      <Description>.venv (Python 3.9 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
