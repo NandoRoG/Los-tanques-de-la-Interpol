@@ -316,6 +316,11 @@ while running:
     if keys[pygame.K_SPACE]:
         if len(points_x) >= 2:
             ok, life_player1, life_player2 = fire(turn, life_player1, life_player2)
+
+            if life_player1 <= 0 or life_player2 <= 0:
+                random.choice(effect_game_over)(screen, x_player1 if turn == 0 else x_player2, func, turn)
+                running = False
+
             if ok:
                turn = changeTurn(turn)
 

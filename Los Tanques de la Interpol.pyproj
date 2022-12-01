@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>d638d109-e7ed-471e-a336-94640c57aea1</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Los_Tanques_de_la_Interpol.py</StartupFile>
+    <StartupFile>los tanques de la interpolacion.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,6 +22,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="los tanques de la interpolacion.py" />
     <Compile Include="Los_Tanques_de_la_Interpol.py" />
   </ItemGroup>
   <ItemGroup>
