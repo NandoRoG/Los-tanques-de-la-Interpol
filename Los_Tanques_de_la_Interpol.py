@@ -1,5 +1,7 @@
-
-import numpy as np 
+import tkinter as tk
+from tkinter import messagebox
+import numpy as np
+from numpy import random 
 import pygame
 from pygame import MOUSEBUTTONUP, MOUSEBUTTONDOWN
 from pygame.locals import( RLEACCEL,
@@ -12,6 +14,19 @@ from pygame.locals import( RLEACCEL,
     QUIT,) 
 
 pygame.init()
+def goodShotPrint(screen,rect):
+     arr =[]
+     arr.append("Ay mi madre el bicho!!!")
+     arr.append("Sera o no sera")
+     arr.append("Si fallo le puedo echar la culpa a la aritmetica")
+     rand = random.random_integers(0,len(arr)-1)
+     fuente = pygame.font.Font(None,24)
+     msg = fuente.render(arr[rand],1,(0,0,0))
+     screen.blit(msg,rect)
+def printPregunta():
+    res = messagebox.askquestion("El flotante de x es x(1+e)?")
+    if res == "yes": return True 
+    else: return False 
 
 class Player(pygame.sprite.Sprite):
     
@@ -47,7 +62,13 @@ class Player(pygame.sprite.Sprite):
         bullet = pygame.image.load("Pictures/images (2).jpg")
         bullet = pygame.transform.scale(bullet,(50,25))
         trace = []
-        for i in range(self.x_points[0],screen.get_width()):
+        
+        correct = printPregunta()
+        a = 1
+        if correct: a = 3
+        audio = pygame.mixer.Sound("Pictures/Cymatics - Gunshot Beefy.wav")
+        audio.play()
+        for i in range(self.x_points[0],screen.get_width(),a):
                y =  pol[0]*(i**2)+pol[1]*i + pol[2]
                if y > screen.get_height() or i == screen.get_width():
                    screen.fill((255, 255, 255))
@@ -69,6 +90,7 @@ class Player(pygame.sprite.Sprite):
                        else:
                            pygame.draw.circle(screen,(200,200,200),trace[j],3)
                    screen.blit(bullet,(i,y))
+                   goodShotPrint(screen,(i -40,y -25))
                    trace.append((i,y))
                    if len(trace) > 100:
                        trace.pop(0)
@@ -167,3 +189,5 @@ while running:
         # Flip the display
    
         pygame.display.flip()
+
+

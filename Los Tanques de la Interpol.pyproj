@@ -27,6 +27,7 @@
     <Folder Include="Pictures\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Pictures\Cymatics - Gunshot Beefy.wav" />
     <Content Include="Pictures\images %281%29.jpg" />
     <Content Include="Pictures\images %282%29.jpg" />
     <Content Include="Pictures\images.jpg" />
