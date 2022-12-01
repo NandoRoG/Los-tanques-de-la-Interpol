@@ -147,12 +147,6 @@ while running:
     
     PrintGame()
     
-       
-        
-
-    
-    
-    
     but =  pygame.mouse.get_pressed(3)
     if but[0] and not on_click:
         on_click = True
